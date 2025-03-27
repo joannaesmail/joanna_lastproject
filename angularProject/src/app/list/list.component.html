@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="filterJobs()"
+      placeholder="Search Jobs"
+    />
+  </div>
+
+  <div class="job-list">
+    <div *ngFor="let job of filteredJobs" class="job-card">
+      <div class="logo" [style.backgroundColor]="job.color">
+        <span>{{ job.title[0] }}</span>
+      </div>
+      <div class="job-info">
+        <h3>{{ job.title }}</h3>
+        <p>{{ job.location }} - {{ job.employmentType }}</p>
+      </div>
+      <div class="tags">
+        <span *ngFor="let skill of job.requiredSkills" class="tag">{{ skill }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <h2>Add a Job</h2>
+    <input
+      type="text"
+      [(ngModel)]="newJob.title"
+      placeholder="Job Title"
+      required
+    />
+    <input
+      type="text"
+      [(ngModel)]="newJob.location"
+      placeholder="Location"
+      required
+    />
+
+    <select [(ngModel)]="newJob.employmentType">
+      <option value="Full-time">Full-time</option>
+      <option value="Part-time">Part-time</option>
+    </select>
+
+    <input
+      type="text"
+      [(ngModel)]="newJob.requiredSkills"
+      placeholder="Required Skills (comma-separated)"
+      required
+    />
+
+    <button (click)="addJob()">Add Job</button>
+  </div>
+</div>
+
+
